@@ -14,9 +14,6 @@ from pathlib import Path
 import environ
 
 env = environ.Env(
-    DEBUG=(bool, False),
-    SECRET_KEY=str,
-    DOMAIN_NAME=str,
     VISUAL_CROSSING_API_KEY=str,
 )
 
@@ -29,18 +26,15 @@ environ.Env.read_env(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = "django-insecure-9#uukk&u3g1kqrd*fpm$715)k4cit1x%no_f^-wb(&%j#^^gxk"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 INTERNAL_IPS = ['127.0.0.1']
 
-DOMAIN_NAME = env('DOMAIN_NAME')
-
 # Visual Crossing
-
 VISUAL_CROSSING_API_KEY = env('VISUAL_CROSSING_API_KEY')
 
 # Application definition
@@ -144,7 +138,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Cache Redis
 
-REDIS_URL = env('REDIS_URL', default='redis://127.0.0.1:6379/1')
+REDIS_URL = 'redis://127.0.0.1:6379/1'
 
 CACHES = {
     'default': {
