@@ -34,11 +34,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 INTERNAL_IPS = ['127.0.0.1']
 
-<<<<<<< HEAD
-=======
-# DOMAIN_NAME = 'http://localhost:8000'
 
->>>>>>> 13dd88d (Small changes)
 # Visual Crossing
 VISUAL_CROSSING_API_KEY = env('VISUAL_CROSSING_API_KEY')
 
