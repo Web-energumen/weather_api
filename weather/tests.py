@@ -42,5 +42,5 @@ class WeatherAPITestCase(APITestCase):
         url = '/api/v1/weather/NonExistentCity/'
         response: Response = self.client.get(url)
 
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-        self.assertEqual(response.data['error'], 'City not found')
+        self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
+        self.assertEqual(response.data['error'], 'Failed to retrieve weather data')

@@ -16,7 +16,7 @@ class WeatherAPIView(APIView):
 
         cache_key = f'weather_{location}_{date1}_{date2}'
         cached_data = cache.get(cache_key)
-        
+
         CACHE_TIMEOUT = 3600 * 6
         if cached_data:
             cached_time = cached_data.get("timestamp")
@@ -48,7 +48,6 @@ class WeatherAPIView(APIView):
             else:
                 return Response({'error': 'Failed to retrieve weather data'},
                                 status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
         except requests.exceptions.RequestException as e:
             return Response({'error': f'Error connecting to the service: {str(e)}'},
