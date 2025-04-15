@@ -16,10 +16,11 @@ class WeatherAPIView(APIView):
 
         cache_key = f'weather_{location}_{date1}_{date2}'
         cached_data = cache.get(cache_key)
-
+        
+        CACHE_TIMEOUT = 3600 * 6
         if cached_data:
             cached_time = cached_data.get("timestamp")
-            if cached_time and time.time() - cached_time < 300:
+            if cached_time and time.time() - cached_time < CACHE_TIMEOUT:
                 return Response(cached_data["data"])
 
         api_key = VISUAL_CROSSING_API_KEY
@@ -30,14 +31,14 @@ class WeatherAPIView(APIView):
         elif date1:
             url += f'/{date1}'
 
-        url += f'?key={api_key}&contentType=json'
+        url += f'?key={api_key}&unitGroup=metric&contentType=json'
 
         try:
             response = requests.get(url)
 
             if response.status_code == 200:
                 weather_data = response.json()
-                cache.set(cache_key, {"data": weather_data, "timestamp": time.time()}, timeout=60*5)
+                cache.set(cache_key, {"data": weather_data, "timestamp": time.time()}, timeout=CACHE_TIMEOUT)
 
                 return Response(weather_data)
 
